@@ -1,6 +1,5 @@
 import os
 import copy
-
 import torch
 import numpy as np
 import cv2
@@ -132,14 +131,7 @@ class CocoKeypoint(data.Dataset):
                 if isinstance(person_info["visible"], torch.Tensor):
                     visible_np = person_info["visible"].numpy()
                 else:
-                    visible_np = person_info["visible"]
-                
-                # # 重新计算腿长
-                # leg_lengths = self.calculate_leg_lengths(keypoints_np, visible_np)
-                # person_info["leg_lengths"] = torch.tensor(leg_lengths, dtype=torch.float32)
-            
-            # 使用变换后的person_info替换target
-            
+                    visible_np = person_info["visible"]      
             return image, person_info
 
         return image, target
@@ -155,7 +147,7 @@ class CocoKeypoint(data.Dataset):
 
 
 if __name__ == '__main__':
-    train = CocoKeypoint("E:/project/HRNet/data/ant2024/", dataset="val")
+    train = CocoKeypoint("E:/project/MK-HRNet/data/ant2025/", dataset="val")
     print(len(train))
     t = train[0]
     print(t)
