@@ -19,31 +19,6 @@ def set_seed(seed=42):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-
-def create_model(num_joints, load_pretrain_weights=False):  # True
-    model = HighResolutionNet(base_channel=32, num_joints=num_joints)
-
-    if load_pretrain_weights:
-        # 载入预训练模型权重
-        weights_dict = torch.load("./pytorch/imagenet/hrnet_w32.pth", map_location='cpu')
-
-        for k in list(weights_dict.keys()):
-            # 如果载入的是imagenet权重，就删除无用权重
-            if ("head" in k) or ("fc" in k):
-                del weights_dict[k]
-
-            # 如果载入的是coco权重，对比下num_joints，如果不相等就删除
-            if "final_layer" in k:
-                if weights_dict[k].shape[0] != num_joints:
-                    del weights_dict[k]
-
-        missing_keys, unexpected_keys = model.load_state_dict(weights_dict, strict=False)
-        if len(missing_keys) != 0:
-            print("missing_keys: ", missing_keys)
-
-    return model
-
-
 def main(args):
     set_seed(42)
     device = torch.device(args.device if torch.cuda.is_available() else "cpu")
@@ -196,9 +171,9 @@ if __name__ == "__main__":
     # 训练设备类型
     parser.add_argument('--device', default='cuda:0', help='device')
     # 训练数据集的根目录(coco2017)
-    parser.add_argument('--data-path', default='D:/Dataset/hrnet/ant_leg/test/ant2025', help='dataset')
+    parser.add_argument('--data-path', default='Dataset/ant2025', help='dataset')
     # COCO数据集人体关键点信息
-    parser.add_argument('--keypoints-path', default="./person_keypoints.json", type=str,
+    parser.add_argument('--keypoints-path', default="./termite_keypoints.json", type=str,
                         help='person_keypoints.json path')
     # 原项目提供的验证集person检测信息，如果要使用GT信息，直接将该参数置为None，建议设置成None
     parser.add_argument('--person-det', type=str, default=None)
