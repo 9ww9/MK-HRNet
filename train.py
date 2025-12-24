@@ -5,7 +5,7 @@ import torch
 from torch.utils import data
 import numpy as np
 import transforms
-from model import HighResolutionNet
+from model import MK_HRNet
 from my_dataset_coco import CocoKeypoint
 from train_utils import train_eval_utils as utils
 import random
