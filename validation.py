@@ -191,16 +191,13 @@ if __name__ == "__main__":
     parser.add_argument('--flip', type=bool, default=False, help='whether using flipped images')
 
     # 数据集的根目录
-    parser.add_argument('--data-path', default=r'D:\Dataset\hrnet\ant_leg\test\ant2025', help='dataset root')
+    parser.add_argument('--data-path', default=r'Dataset\test\termite2025',help='dataset root')
 
     # 训练好的权重文件
-    parser.add_argument('--weights-path', default=r'E:\4.weight\2025.06.07\weight\model-508.pth', type=str, help='training weights')
-
-    # batch size
-    parser.add_argument('--batch-size', default=16, type=int, metavar='N',
+    parser.add_argument('--weights-path'rgument('-r'weight\model.pth', type=str, help='training weights' help='training weights')arser.add_argument('--batch-size', default=16, type=int, metavar='N',
                         help='batch size when validation.')
     # 类别索引和类别名称对应关系
-    parser.add_argument('--label-json-path', type=str, default="person_keypoints.json")
+    parser.add_argument('--label-json-path', type=str, default="termite_keypoints.json")
     # 原项目提供的验证集person检测信息，如果要使用GT信息，直接将该参数置为None
     parser.add_argument('--person-det', type=str, default="ant_keypoints_val2024.json")#json
 
