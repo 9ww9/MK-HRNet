@@ -2,7 +2,7 @@ import torch
 
 
 class KpLoss(object):
-    def __init__(self, leg_weight=0.1):
+    def __init__(self, leg_weight=0.5):
         self.criterion = torch.nn.MSELoss(reduction='none')
         self.leg_criterion = torch.nn.MSELoss(reduction='mean')
         self.leg_weight = leg_weight
